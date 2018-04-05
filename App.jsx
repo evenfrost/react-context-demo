@@ -1,20 +1,20 @@
 import React, { Component, createContext } from 'react';
 
-const { Provider, Consumer } = createContext('light');
+const { Provider, Consumer } = createContext('hello');
 
-const Toolbar = ({ changeTheme }) => (
+const Toolbar = ({ changeTitle }) => (
   <div>
-    <Button onClick={() => changeTheme()}/>
-    <Button onClick={() => changeTheme()}/>
-    <Button onClick={() => changeTheme()}/>
+    <Button onClick={() => changeTitle()}/>
+    <Button onClick={() => changeTitle()}/>
+    <Button onClick={() => changeTitle()}/>
   </div>
 );
 
 const Button = ({ onClick }) => (
   <Consumer>
-    {theme => (
+    {title => (
       <button onClick={onClick}>
-        {theme}
+        {title}
       </button>
     )}
   </Consumer>
@@ -26,20 +26,20 @@ export default class extends Component {
   }
 
   state = {
-    theme: 'dark',
+    title: 'hello',
   };
 
-  changeTheme = () => {
+  changeTitle = () => {
     this.setState(state => ({
-      theme: state.theme === 'dark' ? 'light' : 'dark',
+      title: state.title === 'hello' ? 'bye' : 'hello',
     }));
   }
 
   render() {
     return (
-      <Provider value={this.state.theme}>
+      <Provider value={this.state.title}>
         <div>
-          <Toolbar changeTheme={this.changeTheme} />
+          <Toolbar changeTitle={this.changeTitle} />
         </div>
       </Provider>
     );
